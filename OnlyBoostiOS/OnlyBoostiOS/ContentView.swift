@@ -1,25 +1,44 @@
 import SwiftUI
 import shared
+import AVKit
 
 struct ContentView: View {
     @State private var largestButtonWidth: CGFloat = 0
     private let networking = Networking() // Shared Networking instance
     @State var selectedProvider: Networking.Providers? = nil
-    
+    @State var player = AVPlayer(url: Bundle.main.url(forResource: "SpaceAnimation",
+                                                      withExtension: "mp4")!)
+
     var body: some View {
-        VStack {
-            createSignInButton(imageResource: .apple, provider: .apple, widthToMatch: largestButtonWidth)
-            createSignInButton(imageResource: .google, provider: .google, widthToMatch: largestButtonWidth)
-            createSignInButton(imageResource: .microsoft, provider: .microsoft)
-        }
-        .sheet(item: $selectedProvider) {
-            selectedProvider = nil
-        } content: { selectedProvider in
-            AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: selectedProvider)) { sessionToken in
-                print("ToDO: save token in keychain:", sessionToken)
-            } loginFailed: { failed in
-                print("Login failed!: \(failed)")
+        ZStack {
+            VideoPlayer(player: player)
+                .aspectRatio(contentMode: .fill)
+                .ignoresSafeArea() // Extend to all edges, ignoring safe areas
+                .disabled(true)
+            Text("OnlyBoost")
+                .foregroundStyle(.white)
+                .font(Font.custom("FugazOne-Regular", size: 48))
+
+            VStack {
+                Spacer()
+                createSignInButton(imageResource: .apple, provider: .apple, widthToMatch: largestButtonWidth)
+                createSignInButton(imageResource: .google, provider: .google, widthToMatch: largestButtonWidth)
+                createSignInButton(imageResource: .microsoft, provider: .microsoft)
+                Spacer()
+                    .frame(height: 40)
             }
+            .sheet(item: $selectedProvider) {
+                selectedProvider = nil
+            } content: { selectedProvider in
+                AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: selectedProvider)) { sessionToken in
+                    print("ToDO: save token in keychain:", sessionToken)
+                } loginFailed: { failed in
+                    print("Login failed!: \(failed)")
+                }
+            }
+        }
+        .onAppear {
+            setupPlayer()
         }
     }
     
@@ -56,7 +75,24 @@ struct ContentView: View {
                     }
             }
         }
-        .buttonStyle(.bordered)
+        .buttonStyle(.borderedProminent)
+        .tint(.white)
+    }
+    
+    func setupPlayer() {
+        guard let duration = player.currentItem?.duration else { return }
+        
+        // Observer for forward playback reaching the end
+        player.addBoundaryTimeObserver(forTimes: [NSValue(time: duration)], queue: .main) { [weak player] in
+            guard let player = player else { return }
+            player.rate = -1.0 // Switch to reverse
+            
+            // Observer for reverse reaching the start
+            player.addBoundaryTimeObserver(forTimes: [NSValue(time: CMTime.zero)], queue: .main) { [weak player] in
+                player?.pause()
+                player?.seek(to: .zero) // Reset to start
+            }
+        }
     }
 }
 

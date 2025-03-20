@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,10 @@
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		23DF73882D8B8DBE0065DF59 /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7555FF78242A565900829871 /* Frameworks */ = {
@@ -78,6 +82,7 @@
 		7555FF7D242A565900829871 /* OnlyBoostiOS */ = {
 			isa = PBXGroup;
 			children = (
+				23DF73882D8B8DBE0065DF59 /* Assets */,
 				230036792D8B4566005D9545 /* AuthorizationWebView.swift */,
 				230036752D8B36D8005D9545 /* PreferenceKeys.swift */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
@@ -112,6 +117,9 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				23DF73882D8B8DBE0065DF59 /* Assets */,
 			);
 			name = OnlyBoostiOS;
 			productName = OnlyBoostiOS;
