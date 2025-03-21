@@ -15,17 +15,24 @@ struct ContentView: View {
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea() // Extend to all edges, ignoring safe areas
                 .disabled(true)
-            Text("OnlyBoost")
-                .foregroundStyle(.white)
-                .font(Font.custom("FugazOne-Regular", size: 48))
+            
 
             VStack {
+                Spacer()
+                Text("OnlyBoost")
+                    .foregroundStyle(.white)
+                    .font(Font.custom("FugazOne-Regular", size: 48))
+                GeometryReader { reader in
+                    CarouselView()
+                        .frame(width: reader.size.width)
+                        .border(.red, width: 1)
+                }
                 Spacer()
                 createSignInButton(imageResource: .apple, provider: .apple, widthToMatch: largestButtonWidth)
                 createSignInButton(imageResource: .google, provider: .google, widthToMatch: largestButtonWidth)
                 createSignInButton(imageResource: .microsoft, provider: .microsoft)
                 Spacer()
-                    .frame(height: 40)
+                    .frame(height: 20)
             }
             .sheet(item: $selectedProvider) {
                 selectedProvider = nil
