@@ -28,11 +28,28 @@ struct ContentView: View {
                         .border(.red, width: 1)
                 }
                 Spacer()
-                createSignInButton(imageResource: .apple, provider: .apple, widthToMatch: largestButtonWidth)
-                createSignInButton(imageResource: .google, provider: .google, widthToMatch: largestButtonWidth)
-                createSignInButton(imageResource: .microsoft, provider: .microsoft)
+                
+                Button(action: {
+                    print("Get Started ->") // Your action here
+                }) {
+                    Text("Get Started")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                    
                 Spacer()
-                    .frame(height: 20)
+                    .frame(height: 24)
+                
+                Button {
+                    print("Already Registered?")
+                } label: {
+                    Text("Already Registered? Sign In")
+                }
+                Spacer()
+                    .frame(height: 24)
             }
             .sheet(item: $selectedProvider) {
                 selectedProvider = nil
