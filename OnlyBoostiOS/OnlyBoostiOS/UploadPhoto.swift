@@ -25,36 +25,12 @@ struct UploadPhoto: View {
                         Image(uiImage: image)
                             .resizable()
                             .scaledToFit()
-                    } else {
-                        Color.white // Placeholder background when no image is selected
                     }
                 }
                 .frame(width: geometry.size.width - 20, height: geometry.size.height - 20)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
+                    GlassView()
                 )
-
-                // Upload button centered in the view
-                if selectedImage == nil {
-                    Button("Upload Photo") {
-                        showingOptions = true
-                    }
-                    .font(.headline)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .confirmationDialog("Select Source", isPresented: $showingOptions) {
-                        Button("Photo Library") {
-                            showingPhotoPicker = true
-                        }
-                        Button("Files") {
-                            showingFilePicker = true
-                        }
-                        Button("Cancel", role: .cancel) {}
-                    }
-                }
 
                 // Cancel button in the top-right corner
                 if selectedImage != nil {
@@ -75,15 +51,40 @@ struct UploadPhoto: View {
                     }
                 }
 
-                // "Show Captions" button at the bottom
-                if selectedImage != nil {
+                // Upload button centered in the view
+                if selectedImage == nil {
                     VStack {
-                        Spacer() // Pushes the button to the bottom
+                        Spacer()
+                        Button("Upload Photo") {
+                            showingOptions = true
+                        }
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(content: {
+                            LoopingGradientView(isAnimating: true)
+                        })
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        .confirmationDialog("Select Source", isPresented: $showingOptions) {
+                            Button("Photo Library") {
+                                showingPhotoPicker = true
+                            }
+                            Button("Files") {
+                                showingFilePicker = true
+                            }
+                            Button("Cancel", role: .cancel) {}
+                        }
+                    }
+                } else {
+                    VStack {
+                        Spacer()
                         Button("Show Captions") {
                             showingSubredditsSheet = true
                         }
                         .font(.headline)
                         .padding()
+                        .frame(maxWidth: .infinity)
                         .background(Color.purple)
                         .foregroundColor(.white)
                         .cornerRadius(10)
@@ -107,6 +108,7 @@ struct UploadPhoto: View {
                 }
             }
             .padding(10) // Padding around the entire content
+            .background(Color(.mainBackground))
         }
         .sheet(isPresented: $viewModel.showSheetStack, content: {
             DescriptionSheet()
@@ -118,134 +120,12 @@ struct UploadPhoto: View {
         .sheet(isPresented: $showingFilePicker) {
             FilePicker(image: $selectedImage, isPresented: $showingFilePicker)
         }
-        .onChange(of: selectedImage) { newImage in
+        .onChange(of: selectedImage) { _, newImage in
             if newImage != nil {
                 viewModel.showSheetStack = true
             }
         }
         .environmentObject(viewModel)
-    }
-}
-
-
-
-struct DescriptionSheet: View {
-    @EnvironmentObject var viewModel: AppViewModel
-
-    @State private var tags: [String] = ["white", "brunette", "bikini", "beach", "thin"]
-    @State private var newTag: String = ""
-    @State private var showingSubredditsSheet = false
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
-                        ForEach(tags, id: \.self) { tag in
-                            Text(tag)
-                                .padding(5)
-                                .background(Color.gray.opacity(0.2))
-                                .cornerRadius(5)
-                        }
-                    }
-                    .padding()
-                }
-
-                Text("Think we missed something?")
-                    .font(.headline)
-                    .padding(.top)
-
-                HStack {
-                    TextField("Add new tag", text: $newTag)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button("Add") {
-                        if !newTag.isEmpty {
-                            tags.append(newTag)
-                            newTag = ""
-                        }
-                    }
-                }
-                .padding()
-
-                Button("Find Subreddits") {
-                    showingSubredditsSheet = true
-                }
-                .font(.headline)
-                .padding()
-                .background(Color.green)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Spacer()
-            }
-            .navigationTitle("Image Descriptions")
-        }
-        .sheet(isPresented: $showingSubredditsSheet) {
-            SubredditsSheet(isPresented: $showingSubredditsSheet)
-                .presentationDetents([.medium])
-        }
-    }
-}
-
-struct SubredditsSheet: View {
-    @Binding var isPresented: Bool
-    @State private var subreddits: [String] = ["/r/bikinis", "/r/ebony"]
-    @State private var newSubreddit: String = ""
-    @State private var showingSchedulePostsSheet = false
-
-    var body: some View {
-        NavigationView {
-            VStack {
-                // Subreddit list in a scrollable grid
-                ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 10) {
-                        ForEach(subreddits, id: \.self) { subreddit in
-                            Text(subreddit)
-                                .padding(5)
-                                .background(Color.blue.opacity(0.2))
-                                .cornerRadius(5)
-                        }
-                    }
-                    .padding()
-                }
-
-                // Prompt for adding new subreddits
-                Text("Think we missed something?")
-                    .font(.headline)
-                    .padding(.top)
-
-                // Input field and Add button
-                HStack {
-                    TextField("Add new subreddit", text: $newSubreddit)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Button("Add") {
-                        if !newSubreddit.isEmpty {
-                            subreddits.append(newSubreddit)
-                            newSubreddit = ""
-                        }
-                    }
-                }
-                .padding()
-
-                // Button to proceed to scheduling
-                Button("Continue") {
-                    showingSchedulePostsSheet = true
-                }
-                .font(.headline)
-                .padding()
-                .background(Color.orange)
-                .foregroundColor(.white)
-                .cornerRadius(10)
-
-                Spacer()
-            }
-            .navigationTitle("Subreddits")
-        }
-        // Presents the SchedulePostsSheet as a half-sheet
-        .sheet(isPresented: $showingSchedulePostsSheet) {
-            SchedulePostsSheet(isPresented: $showingSchedulePostsSheet)
-                .presentationDetents([.medium])
-        }
     }
 }
 

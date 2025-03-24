@@ -8,61 +8,66 @@ struct ContentView: View {
     @State var selectedProvider: Networking.Providers? = nil
     @State var player = AVPlayer(url: Bundle.main.url(forResource: "SpaceAnimation",
                                                       withExtension: "mp4")!)
-
+    @State var isShowingGuestFlow = false
     var body: some View {
-        ZStack {
-            VideoPlayer(player: player)
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea() // Extend to all edges, ignoring safe areas
-                .disabled(true)
-            
+        NavigationStack {
+            ZStack {
+                VideoPlayer(player: player)
+                    .aspectRatio(contentMode: .fill)
+                    .ignoresSafeArea() // Extend to all edges, ignoring safe areas
+                    .disabled(true)
+                
 
-            VStack {
-                Spacer()
-                Text("OnlyBoost")
-                    .foregroundStyle(.white)
-                    .font(Font.custom("FugazOne-Regular", size: 48))
-                GeometryReader { reader in
-                    CarouselView()
-                        .frame(width: reader.size.width)
-                        .border(.red, width: 1)
-                }
-                Spacer()
-                
-                Button(action: {
-                    print("Get Started ->") // Your action here
-                }) {
-                    Text("Get Started")
-                        .font(.headline)
-                        .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
+                VStack {
+                    Spacer()
+                    Text("OnlyBoost")
+                        .foregroundStyle(.white)
+                        .font(Font.custom("FugazOne-Regular", size: 48))
+                    GeometryReader { reader in
+                        CarouselView()
+                            .frame(width: reader.size.width)
+                            .border(.red, width: 1)
+                    }
+                    Spacer()
                     
-                Spacer()
-                    .frame(height: 24)
-                
-                Button {
-                    print("Already Registered?")
-                } label: {
-                    Text("Already Registered? Sign In")
+                    Button(action: {
+                        print("Get Started ->") // Your action here
+                    }) {
+                        Text("Get Started")
+                            .font(.headline)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                        
+                    Spacer()
+                        .frame(height: 24)
+                    
+                    Button {
+                        print("Already Registered?")
+                    } label: {
+                        Text("Already Registered? Sign In")
+                    }
+                    Spacer()
+                        .frame(height: 24)
                 }
-                Spacer()
-                    .frame(height: 24)
-            }
-            .sheet(item: $selectedProvider) {
-                selectedProvider = nil
-            } content: { selectedProvider in
-                AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: selectedProvider)) { sessionToken in
-                    print("ToDO: save token in keychain:", sessionToken)
-                } loginFailed: { failed in
-                    print("Login failed!: \(failed)")
+                .navigationDestination(isPresented: $isShowingGuestFlow, destination: {
+                    UploadPhoto()
+                })
+                .sheet(item: $selectedProvider) {
+                    selectedProvider = nil
+                } content: { selectedProvider in
+                    AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: selectedProvider)) { sessionToken in
+                        print("ToDO: save token in keychain:", sessionToken)
+                    } loginFailed: { failed in
+                        print("Login failed!: \(failed)")
+                    }
                 }
             }
-        }
-        .onAppear {
-            setupPlayer()
+            .onAppear {
+                setupPlayer()
+            }
         }
     }
     
