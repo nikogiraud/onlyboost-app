@@ -17,42 +17,54 @@ struct DescriptionSheet: View {
 
     var body: some View {
         NavigationView {
-            VStack {
+            VStack(alignment: .leading) {
                 ScrollView {
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))], spacing: 10) {
                         ForEach(tags, id: \.self) { tag in
                             Text(tag)
                                 .padding(5)
-                                .background(Color.gray.opacity(0.2))
+                                .foregroundStyle(Color.white)
+                                .background(Color.blue)
                                 .cornerRadius(5)
                         }
                     }
                 }
-
-                Text("Think we missed something?")
-                    .font(.headline)
-                    .padding(.top)
                 
-                TextField("Add new tag", text: $newTag)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-
+                Text("Did we miss any?")
+                    .font(.headline)
+                    .foregroundStyle(.white)
+                TextField("",
+                          text: $newTag,
+                          prompt: Text("Add new subreddit").foregroundStyle(.gray))
+                .padding(10)
+                .foregroundStyle(.white)
+                .background(
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(Color.gray, lineWidth: 1)
+                )
+                
+                Spacer()
+                    .frame(height: 20)
+                
                 Button("Find Subreddits") {
                     showingSubredditsSheet = true
                 }
                 .font(.headline)
                 .padding()
-                .background(Color.green)
+                .frame(maxWidth: .infinity)
+                .background {
+                    LoopingGradientView(isAnimating: true)
+                }
                 .foregroundColor(.white)
                 .cornerRadius(10)
-
+                
                 Spacer()
+                    .frame(height: 20)
             }
-            .navigationTitle("Image Descriptions")
             .padding()
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("Subreddits")
+                    Text("Image Captions")
                         .foregroundColor(.white)
                         .font(.largeTitle)
                         .fontWeight(.bold)
@@ -60,10 +72,11 @@ struct DescriptionSheet: View {
             }
             .background(
                 Color(.mainBackground)
+                    .overlay {
+                        GlassView()
+                    }
+                    .ignoresSafeArea()
             )
-        }
-        .overlay {
-            GlassView()
         }
         .sheet(isPresented: $showingSubredditsSheet) {
             SubredditsSheet(isPresented: $showingSubredditsSheet)

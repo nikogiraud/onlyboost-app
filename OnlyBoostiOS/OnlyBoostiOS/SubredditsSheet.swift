@@ -41,12 +41,12 @@ struct SubredditsSheet: View {
                           text: $newSubreddit,
                           prompt: Text("Add new subreddit").foregroundStyle(.gray))
                     .padding(10)
+                    .foregroundStyle(.white)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.gray, lineWidth: 1)
                     )
-                    
-
+                
                 Spacer()
                     .frame(height: 20)
                 
@@ -64,6 +64,7 @@ struct SubredditsSheet: View {
                 .cornerRadius(10)
 
                 Spacer()
+                    .frame(height: 20)
             }
             .padding()
             .toolbar {
@@ -76,10 +77,11 @@ struct SubredditsSheet: View {
             }
             .background(
                 Color(.mainBackground)
+                    .overlay {
+                        GlassView()
+                    }
+                    .ignoresSafeArea()
             )
-        }
-        .overlay {
-            GlassView()
         }
         // Presents the SchedulePostsSheet as a half-sheet
         .sheet(isPresented: $showingSchedulePostsSheet) {

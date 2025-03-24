@@ -2,6 +2,7 @@
 import SwiftUI
 import PhotosUI
 import UniformTypeIdentifiers
+import shared
 
 class AppViewModel: ObservableObject {
     @Published var showSignUpPopup = false
@@ -15,6 +16,8 @@ struct UploadPhoto: View {
     @State private var showingFilePicker = false
     @State private var showingSubredditsSheet = false
     @StateObject private var viewModel = AppViewModel()
+    private let networking = Networking() // Shared Networking instance
+    @State var selectedProvider: Networking.Providers? = nil
 
     var body: some View {
         GeometryReader { geometry in
@@ -85,7 +88,7 @@ struct UploadPhoto: View {
                         .font(.headline)
                         .padding()
                         .frame(maxWidth: .infinity)
-                        .background(Color.purple)
+                        .background(Color.blue)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                         .padding(.bottom, 20) // Extra padding from the bottom edge
@@ -125,65 +128,16 @@ struct UploadPhoto: View {
                 viewModel.showSheetStack = true
             }
         }
-        .environmentObject(viewModel)
-    }
-}
-
-struct SchedulePostsSheet: View {
-    @EnvironmentObject var viewModel: AppViewModel
-    @Binding var isPresented: Bool
-    
-    // Non-optional @State variables with default values
-    @State private var selectedInitialSpacing: String = "1H"
-    @State private var selectedRepostScheduling: String = "3W"
-    
-    // Options for the segmented controls
-    let initialSpacings = ["1H", "6H", "12H", "24H"]
-    let repostSchedules = ["3W", "6W", "9W", "12W"]
-    
-    var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                // Initial Post Spacing Picker
-                Text("Initial Post Spacing")
-                    .font(.headline)
-                Picker("Initial Post Spacing", selection: $selectedInitialSpacing) {
-                    ForEach(initialSpacings, id: \.self) { spacing in
-                        Text(spacing)
-                    }
-                }
-                .pickerStyle(.segmented) // Segmented control style
-                
-                // Repost Scheduling Picker
-                Text("Repost Scheduling")
-                    .font(.headline)
-                Picker("Repost Scheduling", selection: $selectedRepostScheduling) {
-                    ForEach(repostSchedules, id: \.self) { schedule in
-                        Text(schedule)
-                    }
-                }
-                .pickerStyle(.segmented) // Segmented control style
-                
-                Spacer()
-                
-                // Post button
-                Button("Post") {
-                    print("Selected: \(selectedInitialSpacing), \(selectedRepostScheduling)")
-                    viewModel.showSheetStack = false // Dismiss all sheets
-                    withAnimation {
-                        viewModel.showSignUpPopup = true // Show the popup
-                        isPresented = false // Dismiss the sheet
-                    }
-                }
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
-
+        .sheet(item: $selectedProvider) {
+            selectedProvider = nil
+        } content: { selectedProvider in
+            AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: selectedProvider)) { sessionToken in
+                print("ToDO: save token in keychain:", sessionToken)
+            } loginFailed: { failed in
+                print("Login failed!: \(failed)")
             }
-            .padding()
-            .navigationTitle("Schedule Posts")
         }
+        .environmentObject(viewModel)
     }
 }
 
@@ -266,4 +220,15 @@ struct FilePicker: UIViewControllerRepresentable {
 
 #Preview {
     UploadPhoto()
+}
+
+extension Networking.Providers: @retroactive Identifiable {
+    public var id: String {
+        switch self {
+        case .google: return "google"
+        case .microsoft: return "microsoft"
+        case .apple: return "apple"
+        default: return "unknown" // Handle exhaustiveness
+        }
+    }
 }

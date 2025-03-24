@@ -20,11 +20,11 @@
 		23DF73A12D8E2CE00065DF59 /* UploadPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF73A02D8E2CE00065DF59 /* UploadPhoto.swift */; };
 		23DF73A32D8E71640065DF59 /* SignUpPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF73A22D8E71640065DF59 /* SignUpPopup.swift */; };
 		23EC9DC02D91255A00D76109 /* GlassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DBF2D91255A00D76109 /* GlassView.swift */; };
-		23EC9DC22D912D5B00D76109 /* AnimatedGradientButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DC12D912D5B00D76109 /* AnimatedGradientButton.swift */; };
-		23EC9DC42D912DD200D76109 /* HueAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DC32D912DD200D76109 /* HueAnimatedButton.swift */; };
 		23EC9DC62D912E7E00D76109 /* LoopingGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DC52D912E7E00D76109 /* LoopingGradientView.swift */; };
 		23EC9DC82D9137D800D76109 /* DescriptionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DC72D9137D800D76109 /* DescriptionSheet.swift */; };
 		23EC9DCA2D9137F800D76109 /* SubredditsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DC92D9137F800D76109 /* SubredditsSheet.swift */; };
+		23EC9DCC2D9148E400D76109 /* SchedulePostsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DCB2D9148E400D76109 /* SchedulePostsSheet.swift */; };
+		23EC9DCE2D91523900D76109 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23EC9DCD2D91523900D76109 /* SegmentedControl.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,11 +55,11 @@
 		23DF73A02D8E2CE00065DF59 /* UploadPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPhoto.swift; sourceTree = "<group>"; };
 		23DF73A22D8E71640065DF59 /* SignUpPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPopup.swift; sourceTree = "<group>"; };
 		23EC9DBF2D91255A00D76109 /* GlassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlassView.swift; sourceTree = "<group>"; };
-		23EC9DC12D912D5B00D76109 /* AnimatedGradientButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientButton.swift; sourceTree = "<group>"; };
-		23EC9DC32D912DD200D76109 /* HueAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueAnimatedButton.swift; sourceTree = "<group>"; };
 		23EC9DC52D912E7E00D76109 /* LoopingGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopingGradientView.swift; sourceTree = "<group>"; };
 		23EC9DC72D9137D800D76109 /* DescriptionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionSheet.swift; sourceTree = "<group>"; };
 		23EC9DC92D9137F800D76109 /* SubredditsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsSheet.swift; sourceTree = "<group>"; };
+		23EC9DCB2D9148E400D76109 /* SchedulePostsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePostsSheet.swift; sourceTree = "<group>"; };
+		23EC9DCD2D91523900D76109 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* OnlyBoostiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyBoostiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -108,11 +108,11 @@
 		7555FF7D242A565900829871 /* OnlyBoostiOS */ = {
 			isa = PBXGroup;
 			children = (
+				23EC9DCD2D91523900D76109 /* SegmentedControl.swift */,
+				23EC9DCB2D9148E400D76109 /* SchedulePostsSheet.swift */,
 				23EC9DC92D9137F800D76109 /* SubredditsSheet.swift */,
 				23EC9DC72D9137D800D76109 /* DescriptionSheet.swift */,
 				23EC9DC52D912E7E00D76109 /* LoopingGradientView.swift */,
-				23EC9DC32D912DD200D76109 /* HueAnimatedButton.swift */,
-				23EC9DC12D912D5B00D76109 /* AnimatedGradientButton.swift */,
 				23EC9DBF2D91255A00D76109 /* GlassView.swift */,
 				23DF73A22D8E71640065DF59 /* SignUpPopup.swift */,
 				23DF73A02D8E2CE00065DF59 /* UploadPhoto.swift */,
@@ -237,14 +237,14 @@
 			files = (
 				23DF73912D8CD65A0065DF59 /* CarouselView.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
+				23EC9DCC2D9148E400D76109 /* SchedulePostsSheet.swift in Sources */,
 				23EC9DC02D91255A00D76109 /* GlassView.swift in Sources */,
 				23DF73932D8CE5EB0065DF59 /* ImageLoader.swift in Sources */,
 				230036762D8B36DD005D9545 /* PreferenceKeys.swift in Sources */,
 				23EC9DC62D912E7E00D76109 /* LoopingGradientView.swift in Sources */,
 				23DF73952D8CEB0F0065DF59 /* TestAsync.swift in Sources */,
 				23DF73A12D8E2CE00065DF59 /* UploadPhoto.swift in Sources */,
-				23EC9DC42D912DD200D76109 /* HueAnimatedButton.swift in Sources */,
-				23EC9DC22D912D5B00D76109 /* AnimatedGradientButton.swift in Sources */,
+				23EC9DCE2D91523900D76109 /* SegmentedControl.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				23DF739F2D8E21120065DF59 /* GuestFlowUpload.swift in Sources */,
 				23DF73A32D8E71640065DF59 /* SignUpPopup.swift in Sources */,
