@@ -1,25 +1,7 @@
 import SwiftUI
 
 struct GalleryContainerView: View {
-    @State private var imageUrls = [
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-        "https://i.imgur.com/3LWLaSL.png",
-        "https://i.imgur.com/6jTB0Cz.jpeg",
-    ]
-
+    @State private var imageUrls: [String]
     @State private var tappedImageIndex: Int? = nil
     @State private var showDetailView = false
 
@@ -60,6 +42,24 @@ struct DetailView: View {
 
 struct GalleryContainerView_Previews: PreviewProvider {
     static var previews: some View {
-        GalleryContainerView()
+        let imageURLs = [
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+            "https://i.imgur.com/3LWLaSL.png",
+            "https://i.imgur.com/6jTB0Cz.jpeg",
+        ]
+        GalleryContainerView(imageUrls: imageURLs)
     }
 }
