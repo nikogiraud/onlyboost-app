@@ -9,5 +9,5 @@ object EnvironmentConfiguration {
     val host = "http://192.168.1.151"
     var callbackOrigin = "http://localhost:3149"
     val apiOrigin = "$host:3149"
-    val frontendHost = "$host:5173"
+    val frontendHost = "$host:8080"
 }

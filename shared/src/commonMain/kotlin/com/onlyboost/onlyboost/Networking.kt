@@ -19,11 +19,11 @@ class Networking {
         }
 
         fun authorizationSuccessStart(): String {
-            return "${EnvironmentConfiguration.frontendHost}/auth/success?sessionToken"
+            return "${EnvironmentConfiguration.frontendHost}/auth/login/success?sessionToken"
         }
 
         fun authorizationFailureStart(): String {
-            return "${EnvironmentConfiguration.frontendHost}/auth/failure"
+            return "${EnvironmentConfiguration.frontendHost}/auth/login/failure"
         }
     }
 }
