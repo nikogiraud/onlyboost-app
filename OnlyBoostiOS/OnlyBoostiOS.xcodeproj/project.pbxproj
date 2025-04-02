@@ -12,6 +12,9 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		230036762D8B36DD005D9545 /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230036752D8B36D8005D9545 /* PreferenceKeys.swift */; };
 		2300367A2D8B4566005D9545 /* AuthorizationWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230036792D8B4566005D9545 /* AuthorizationWebView.swift */; };
+		236AD51E2D9D321300AA6671 /* ImageGalleryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AD51C2D9D321300AA6671 /* ImageGalleryCell.swift */; };
+		236AD51F2D9D321300AA6671 /* ImageGalleryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AD51D2D9D321300AA6671 /* ImageGalleryCollectionView.swift */; };
+		236AD5212D9D321900AA6671 /* GalleryContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236AD5202D9D321900AA6671 /* GalleryContainerView.swift */; };
 		23DF73912D8CD65A0065DF59 /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF73902D8CD65A0065DF59 /* CarouselView.swift */; };
 		23DF73932D8CE5EB0065DF59 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF73922D8CE5EB0065DF59 /* ImageLoader.swift */; };
 		23DF73952D8CEB0F0065DF59 /* TestAsync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23DF73942D8CEB040065DF59 /* TestAsync.swift */; };
@@ -47,6 +50,9 @@
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		230036752D8B36D8005D9545 /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		230036792D8B4566005D9545 /* AuthorizationWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationWebView.swift; sourceTree = "<group>"; };
+		236AD51C2D9D321300AA6671 /* ImageGalleryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCell.swift; sourceTree = "<group>"; };
+		236AD51D2D9D321300AA6671 /* ImageGalleryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGalleryCollectionView.swift; sourceTree = "<group>"; };
+		236AD5202D9D321900AA6671 /* GalleryContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryContainerView.swift; sourceTree = "<group>"; };
 		23DF73902D8CD65A0065DF59 /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
 		23DF73922D8CE5EB0065DF59 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		23DF73942D8CEB040065DF59 /* TestAsync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAsync.swift; sourceTree = "<group>"; };
@@ -118,6 +124,9 @@
 				23DF73A02D8E2CE00065DF59 /* UploadPhoto.swift */,
 				23DF739C2D8E1EF90065DF59 /* AnimatedButton.swift */,
 				23DF73942D8CEB040065DF59 /* TestAsync.swift */,
+				236AD51C2D9D321300AA6671 /* ImageGalleryCell.swift */,
+				236AD51D2D9D321300AA6671 /* ImageGalleryCollectionView.swift */,
+				236AD5202D9D321900AA6671 /* GalleryContainerView.swift */,
 				23DF73922D8CE5EB0065DF59 /* ImageLoader.swift */,
 				23DF73902D8CD65A0065DF59 /* CarouselView.swift */,
 				23DF73882D8B8DBE0065DF59 /* Assets */,
@@ -243,6 +252,8 @@
 				230036762D8B36DD005D9545 /* PreferenceKeys.swift in Sources */,
 				23EC9DC62D912E7E00D76109 /* LoopingGradientView.swift in Sources */,
 				23DF73952D8CEB0F0065DF59 /* TestAsync.swift in Sources */,
+				236AD51E2D9D321300AA6671 /* ImageGalleryCell.swift in Sources */,
+				236AD51F2D9D321300AA6671 /* ImageGalleryCollectionView.swift in Sources */,
 				23DF73A12D8E2CE00065DF59 /* UploadPhoto.swift in Sources */,
 				23EC9DCE2D91523900D76109 /* SegmentedControl.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
@@ -252,6 +263,7 @@
 				23EC9DC82D9137D800D76109 /* DescriptionSheet.swift in Sources */,
 				2300367A2D8B4566005D9545 /* AuthorizationWebView.swift in Sources */,
 				23EC9DCA2D9137F800D76109 /* SubredditsSheet.swift in Sources */,
+				236AD5212D9D321900AA6671 /* GalleryContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
