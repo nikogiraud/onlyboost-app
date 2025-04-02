@@ -13,6 +13,7 @@ struct SignUpPopup: View {
     private let networking = Networking() // Shared Networking instance
     @State var selectedProvider: Networking.Providers? = nil
     @State private var largestButtonWidth: CGFloat = 0
+    @State private var alertMessage: String = ""
     let imageSize: CGFloat = 22.5
     
     var body: some View {
@@ -30,6 +31,26 @@ struct SignUpPopup: View {
         .background(Color(.mainBackground))
         .cornerRadius(20)
         .shadow(radius: 10)
+        .sheet(item: $selectedProvider) { provider in
+            AuthorizationWebView(urlPath: Networking.Paths().authEntryPoint(provider: provider)) { sessionToken in
+                print(sessionToken)
+                selectedProvider = nil
+            } loginFailed: { error in
+                alertMessage = error ?? "An unexpected error occurred. Please try again!"
+            }   
+        }
+        .alert("Login Failed",
+               isPresented: Binding(get: {
+                    return !alertMessage.isEmpty
+                }, set: { _ in
+                    return
+                }))
+                {
+                    Button("OK", action: {})
+                } message: {
+                    Text(alertMessage)
+                }
+
     }
     
     func createSignInButton(imageResource: ImageResource,
