@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct GalleryContainerView: View {
-    @State private var imageUrls: [String]
+    @State var imageUrls: [String]
     @State private var tappedImageIndex: Int? = nil
     @State private var showDetailView = false
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -13,22 +13,14 @@ struct GalleryContainerView: View {
                     self.tappedImageIndex = index
                     self.showDetailView = true
                 }
-
-                NavigationLink(
-                    destination: DetailView(imageUrl: imageUrls[tappedImageIndex ?? 0]),
-                    isActive: $showDetailView
-                ) {
-                    EmptyView()
-                }
             }
-            .navigationTitle("Gallery")
         }
     }
 }
-
+    
 struct DetailView: View {
     let imageUrl: String
-
+    
     var body: some View {
         VStack {
             Text("Detail View")
@@ -39,27 +31,7 @@ struct DetailView: View {
         .navigationTitle("Image Detail")
     }
 }
-
-struct GalleryContainerView_Previews: PreviewProvider {
-    static var previews: some View {
-        let imageURLs = [
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-            "https://i.imgur.com/3LWLaSL.png",
-            "https://i.imgur.com/6jTB0Cz.jpeg",
-        ]
-        GalleryContainerView(imageUrls: imageURLs)
-    }
+    
+#Preview {
+    return GalleryContainerView(imageUrls: ["abc.com", "xyz.com", "pqr.com"])
 }
